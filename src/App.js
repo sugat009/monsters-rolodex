@@ -28,6 +28,11 @@ class App extends Component {
       );
   }
 
+  // Lexical scoping
+  // Arrow functions are automatically binded in the place from which
+  // they were defined
+  handleChange = e => this.setState({ searchField: e.target.value });
+
   // This method is called every time setState is called
   render() {
     // Object destructuring
@@ -40,7 +45,7 @@ class App extends Component {
       <div className="App">
         <SearchBox
           placeholder="Search Monsters"
-          handleChange={e => this.setState({ searchField: e.target.value })}
+          handleChange={this.handleChange}
         />
         <CardList monsters={filteredMonsters} />
       </div>
