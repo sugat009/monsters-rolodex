@@ -27,16 +27,24 @@ class App extends Component {
       );
   }
 
+  // This method is called every time setState is called
   render() {
+    // Object destructuring
+    const { monsters, searchField } = this.state;
+    // Filtering based on the passed string in search bar
+    const filteredMonsters = monsters.filter(monster =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
         {/* this.setState is asynchronous call */}
+        {/* so dont expect state to be updated after setting the state */}
         <input
           type="search"
           placeholder="search monsters"
           onChange={e => this.setState({ searchField: e.target.value })}
         />
-        <CardList monsters={this.state.monsters} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
